@@ -39,3 +39,6 @@ Thumbs.db
 # Logs & temp
 *.log
 runs/
+
+# Dataset
+dataset/
