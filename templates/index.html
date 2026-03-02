@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YOLO Detection</title>
+</head>
+<body>
+  <h2>YOLO - Car & Person Detection</h2>
+  <video id="vid" autoplay muted playsinline></video>
+  <br><br>
+  <button onclick="capture()">Capture & Detect</button>
+  <br><br>
+  <canvas id="canvas" style="display:none"></canvas>
+  <br>
+  <img id="result" />
+
+  <script>
+    const video = document.getElementById("vid");
+    const canvas = document.getElementById("canvas");
+    const result = document.getElementById("result");
+
+    navigator.mediaDevices.getUserMedia({ video: { width: 1920, height: 1080 } })
+      .then(stream => video.srcObject = stream)
+      .catch(err => alert("Camera error: " + err));
+
+    function capture() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0);
+
+      const imageData = canvas.toDataURL("image/jpeg", 0.8);
+
+      fetch("/detect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: imageData })
+      })
+      .then(r => r.json())
+      .then(data => result.src = data.image)
+      .catch(err => alert("Detection error: " + err));
+    }
+  </script>
+</body>
+</html>
