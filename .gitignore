@@ -18,6 +18,7 @@ env/
 *.onnx
 *.engine
 *.tflite
+model/
 
 # Environment variables
 .env
