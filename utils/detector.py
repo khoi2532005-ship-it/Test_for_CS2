@@ -2,7 +2,7 @@ from ultralytics import YOLO
 import cv2, numpy as np, base64, os
 
 class Detector:
-    def __init__(self, model_path="model/yolo11n.pt"):
+    def __init__(self, model_path="model/best.pt"):
         if not os.path.exists(model_path):
             self.model = YOLO("yolo11n.pt")
         else:
