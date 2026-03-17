@@ -8,7 +8,7 @@ class Detector:
         else:
             self.model = YOLO(model_path)
 
-    def process_frame(self, data_url, classes=[0, 2], conf=0.4):
+    def process_frame(self, data_url, classes=None, conf=0.05):
         if "," in data_url:
             img_bytes = base64.b64decode(data_url.split(",")[1])
         else:
