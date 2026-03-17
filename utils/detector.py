@@ -21,5 +21,5 @@ class Detector:
 
         results = self.model(frame, classes=classes, conf=conf)
         annotated = results[0].plot()
-        _, buffer = cv2.imencode(".jpg", annotated, [cv2.IMWRITE_JPEG_QUALITY, 70])
+        _, buffer = cv2.imencode(".jpg", annotated, [cv2.IMWRITE_JPEG_QUALITY, 95])
         return "data:image/jpeg;base64," + base64.b64encode(buffer).decode("utf-8")
